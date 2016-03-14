@@ -1,0 +1,11 @@
+name: Spigot-Multimode
+version: 0.1
+author: dj2bee
+main: de.dj2bee.minecraft.spigot.multimode.SpigotMultimode
+commands:
+  kit:
+    description: Gibt dem Spieler ein Starterkit
+    usage: /kit
+  toggle:
+    description: Wechselt zwischen den Gamemodes hin und her
+    usage: /toggle
