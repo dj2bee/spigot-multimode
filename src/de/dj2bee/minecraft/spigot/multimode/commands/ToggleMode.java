@@ -7,6 +7,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.UUID;
 
 public class ToggleMode implements CommandExecutor {
 
@@ -17,10 +20,16 @@ public class ToggleMode implements CommandExecutor {
 
             if(player.getGameMode().equals(GameMode.CREATIVE)) {
                 //Switch from Creative to Survival
-                Datastore.setInventoryCreative(player.getUniqueId(), player.getInventory().getStorageContents());
+                ItemStack[] inventory = player.getInventory().getStorageContents();
+                UUID playerId = player.getUniqueId();
+                Datastore.setInventoryCreative(playerId, inventory);
+
                 player.getInventory().clear();
                 player.setGameMode(GameMode.SURVIVAL);
-                player.getInventory().setStorageContents(Datastore.getInventorySurvival(player.getUniqueId()));
+
+                inventory = Datastore.getInventorySurvival(playerId);
+                player.getInventory().setStorageContents(inventory);
+
                 player.sendMessage(ChatColor.DARK_PURPLE + "Gamemode: Survival");
             } else {
                 //Switch from Survival to Creative
